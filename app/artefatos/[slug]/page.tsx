@@ -349,8 +349,10 @@ function ResearchReport({ dados }: { dados: any }) {
   )
 }
 
-export default async function ArtefatoPage({ params }: { params: { slug: string } }) {
+export default async function ArtefatoPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params
   const artefato = await getArtefato(slug)
+  
   if (!artefato) notFound()
   const cor = CORES[artefato.tipo] || 'var(--gray-400)'
 
