@@ -16,7 +16,9 @@ const CORES: Record<string, string> = {
 }
 
 export default async function ProjetoPage({ params }: { params: { slug: string } }) {
+  console.log('slug recebido:', params.slug)
   const projeto = await getProjeto(params.slug)
+  console.log('projeto encontrado:', projeto)
   if (!projeto) notFound()
 
   const artefatos = await getArtefatos({ projeto: params.slug })
