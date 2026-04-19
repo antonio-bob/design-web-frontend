@@ -350,7 +350,7 @@ function ResearchReport({ dados }: { dados: any }) {
 }
 
 export default async function ArtefatoPage({ params }: { params: { slug: string } }) {
-  const artefato = await getArtefato(params.slug)
+  const artefato = await getArtefato(slug)
   if (!artefato) notFound()
   const cor = CORES[artefato.tipo] || 'var(--gray-400)'
 
