@@ -15,13 +15,11 @@ const CORES: Record<string, string> = {
   research_report: 'var(--black)',
 }
 
-export default async function ProjetoPage({ params }: { params: { slug: string } }) {
-  console.log('slug recebido:', params.slug)
-  const projeto = await getProjeto(params.slug)
-  console.log('projeto encontrado:', projeto)
+export default async function ProjetoPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params
+  const projeto = await getProjeto(slug)
   if (!projeto) notFound()
-
-  const artefatos = await getArtefatos({ projeto: params.slug })
+  const artefatos = await getArtefatos({ projeto: slug })
 
   return (
     <>
