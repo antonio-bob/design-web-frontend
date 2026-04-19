@@ -1,39 +1,41 @@
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://api.design.antoniobob.com'
 
+const opts = { cache: 'no-store' as const }
+
 export async function getProjetos() {
-  const res = await fetch(`${API_URL}/api/projetos/`)
+  const res = await fetch(`${API_URL}/api/projetos/`, opts)
   if (!res.ok) return []
   return res.json()
 }
 
 export async function getProjeto(slug: string) {
-  const res = await fetch(`${API_URL}/api/projetos/${slug}`)
+  const res = await fetch(`${API_URL}/api/projetos/${slug}`, opts)
   if (!res.ok) return null
   return res.json()
 }
 
 export async function getArtefatos(params?: { tipo?: string, projeto?: string }) {
   const q = new URLSearchParams(params as any).toString()
-  const res = await fetch(`${API_URL}/api/artefatos/${q ? '?' + q : ''}`)
+  const res = await fetch(`${API_URL}/api/artefatos/${q ? '?' + q : ''}`, opts)
   if (!res.ok) return []
   return res.json()
 }
 
 export async function getArtefato(slug: string) {
-  const res = await fetch(`${API_URL}/api/artefatos/${slug}`)
+  const res = await fetch(`${API_URL}/api/artefatos/${slug}`, opts)
   if (!res.ok) return null
   return res.json()
 }
 
 export async function getMetodos(fase?: string) {
   const q = fase ? `?fase=${fase}` : ''
-  const res = await fetch(`${API_URL}/api/metodos/${q}`)
+  const res = await fetch(`${API_URL}/api/metodos/${q}`, opts)
   if (!res.ok) return []
   return res.json()
 }
 
 export async function getMetodo(slug: string) {
-  const res = await fetch(`${API_URL}/api/metodos/${slug}`)
+  const res = await fetch(`${API_URL}/api/metodos/${slug}`, opts)
   if (!res.ok) return null
   return res.json()
 }
