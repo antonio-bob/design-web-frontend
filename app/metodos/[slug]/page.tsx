@@ -13,6 +13,7 @@ const FASE_CORES: Record<string, string> = {
 export default async function MetodoPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
   const metodo = await getMetodo(slug)
+  if (!metodo) notFound()
 
   const cor = FASE_CORES[metodo.fase] || 'var(--gray-400)'
 
