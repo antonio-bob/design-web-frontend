@@ -15,7 +15,7 @@ const CORES: Record<string, string> = {
   research_report: 'var(--black)',
 }
 
-function Persona({ dados, titulo }: { dados: any; titulo: string }) {
+function Persona({ dados, titulo, criado_em }: { dados: any; titulo: string; criado_em?: string }) {
   return (
     <div style={{ display: 'grid', gridTemplateColumns: 'clamp(200px,25vw,300px) 1fr', borderBottom: '1px solid var(--gray-200)' }}>
       <div style={{ background: 'var(--black)', padding: 'clamp(24px,4vw,40px)', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', minHeight: 'clamp(280px,40vw,420px)' }}>
@@ -31,6 +31,12 @@ function Persona({ dados, titulo }: { dados: any; titulo: string }) {
               <span style={{ fontSize: '12px', fontWeight: 400, color: 'white', textAlign: 'right' }}>{v}</span>
             </div>
           ))}
+          {criado_em && (
+            <div style={{ display: 'flex', justifyContent: 'space-between', borderTop: '1px solid rgba(255,255,255,0.07)', paddingTop: '5px', marginTop: '5px' }}>
+              <span style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase', color: 'var(--gray-400)' }}>Criado</span>
+              <span style={{ fontSize: '12px', fontWeight: 400, color: 'white' }}>{new Date(criado_em).toLocaleDateString('pt-BR', { month: 'short', year: 'numeric' })}</span>
+            </div>
+          )}
           {dados.citacao && (
             <div style={{ fontSize: '12px', fontWeight: 300, fontStyle: 'italic', color: 'rgba(255,255,255,0.4)', lineHeight: 1.5, marginTop: '20px', borderLeft: '3px solid var(--coral)', paddingLeft: '10px' }}>
               "{dados.citacao}"
@@ -40,11 +46,16 @@ function Persona({ dados, titulo }: { dados: any; titulo: string }) {
       </div>
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr' }}>
         {dados.blocos && dados.blocos.map((bloco: any, i: number) => (
-          <div key={i} style={{ padding: 'clamp(16px,3vw,28px)', borderBottom: '1px solid var(--gray-200)', borderRight: i % 2 === 0 ? '1px solid var(--gray-200)' : 'none', gridColumn: bloco.full ? '1/-1' : undefined }}>
-            <div style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '3px', textTransform: 'uppercase', color: 'var(--coral)', marginBottom: '12px' }}>{bloco.label}</div>
+          <div key={i} style={{
+            padding: 'clamp(16px,3vw,28px)',
+            borderBottom: '1px solid var(--gray-200)',
+            borderRight: i % 2 === 0 ? '1px solid var(--gray-200)' : 'none',
+            gridColumn: bloco.full ? '1/-1' : undefined,
+          }}>
+            <div style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '3px', textTransform: 'uppercase', color: bloco.label === 'Oportunidade de Design' ? 'var(--blue)' : 'var(--coral)', marginBottom: '12px' }}>{bloco.label}</div>
             {bloco.itens && bloco.itens.map((item: string, j: number) => (
               <div key={j} style={{ display: 'flex', gap: '10px', marginBottom: '7px' }}>
-                <div style={{ width: '4px', height: '4px', borderRadius: '50%', background: 'var(--black)', marginTop: '7px', flexShrink: 0 }}></div>
+                <div style={{ width: '4px', height: '4px', borderRadius: '50%', background: bloco.label === 'Oportunidade de Design' ? 'var(--blue)' : 'var(--black)', marginTop: '7px', flexShrink: 0 }}></div>
                 <span style={{ fontSize: 'clamp(11px,1.5vw,13px)', fontWeight: 300, lineHeight: 1.5 }}>{item}</span>
               </div>
             ))}
@@ -54,6 +65,7 @@ function Persona({ dados, titulo }: { dados: any; titulo: string }) {
     </div>
   )
 }
+
 
 function JourneyMap({ dados, futuro }: { dados: any; futuro?: boolean }) {
   const headerBg = futuro ? 'var(--blue)' : 'var(--black)'
@@ -385,6 +397,7 @@ export default async function ArtefatoPage({ params }: { params: Promise<{ slug:
           {artefato.projeto_slug && <span style={{ display: 'block', fontSize: '9px', fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase', color: 'var(--gray-400)', lineHeight: 2.2 }}>Projeto <strong style={{ color: 'var(--black)', fontWeight: 500, fontSize: '12px', letterSpacing: 0 }}>{artefato.projeto_slug}</strong></span>}
           {artefato.metodo_origem && <span style={{ display: 'block', fontSize: '9px', fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase', color: 'var(--gray-400)', lineHeight: 2.2 }}>Método <strong style={{ color: 'var(--black)', fontWeight: 500, fontSize: '12px', letterSpacing: 0 }}>{artefato.metodo_origem}</strong></span>}
           <span style={{ display: 'block', fontSize: '9px', fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase', color: 'var(--gray-400)', lineHeight: 2.2 }}>Versão <strong style={{ color: 'var(--black)', fontWeight: 500, fontSize: '12px', letterSpacing: 0 }}>{artefato.versao}</strong></span>
+          <span style={{ display: 'block', fontSize: '9px', fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase', color: 'var(--gray-400)', lineHeight: 2.2 }}>Criado <strong style={{ color: 'var(--black)', fontWeight: 500, fontSize: '12px', letterSpacing: 0 }}>{new Date(artefato.criado_em).toLocaleDateString('pt-BR', { month: 'long', year: 'numeric' })}</strong></span>
         </div>
       </div>
       {artefato.tipo === 'persona' && <Persona dados={artefato.dados} titulo={artefato.titulo} />}
