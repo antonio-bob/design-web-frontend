@@ -20,7 +20,7 @@ export default async function Home() {
       {/* HERO */}
       <div style={{ padding: 'clamp(48px,8vw,120px) clamp(16px,3vw,48px) 0', borderBottom: '2px solid var(--black)' }}>
         <div style={{ fontSize: 'clamp(48px,12vw,160px)', fontWeight: 900, lineHeight: 0.88, textTransform: 'uppercase', letterSpacing: '-3px' }}>
-          THIS IS<br />SERVICE<br />DESIGN<br />DOING
+          DESIGN<br />MEMORY
         </div>
         <div style={{ fontSize: 'clamp(13px,1.8vw,16px)', fontWeight: 300, color: 'var(--gray-600)', marginTop: '24px', maxWidth: '560px', lineHeight: 1.6 }}>
           Base de conhecimento em Service Design. Métodos, artefatos e notas de aplicação organizados por fase do processo.
