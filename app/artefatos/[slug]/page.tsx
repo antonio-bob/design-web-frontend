@@ -15,57 +15,163 @@ const CORES: Record<string, string> = {
   research_report: 'var(--black)',
 }
 
-function Persona({ dados, titulo, criado_em }: { dados: any; titulo: string; criado_em?: string }) {
+function Persona({ dados, titulo, criado_em, projeto_slug, metodo_origem, versao }: {
+  dados: any; titulo: string; criado_em?: string;
+  projeto_slug?: string; metodo_origem?: string; versao?: string
+}) {
+  const dataFormatada = criado_em
+    ? new Date(criado_em).toLocaleDateString('pt-BR', { month: 'long', year: 'numeric' })
+    : null
+
   return (
-    <div style={{ display: 'grid', gridTemplateColumns: 'clamp(200px,25vw,300px) 1fr', borderBottom: '1px solid var(--gray-200)' }}>
-      <div style={{ background: 'var(--black)', padding: 'clamp(24px,4vw,40px)', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', minHeight: 'clamp(280px,40vw,420px)' }}>
+    <>
+      {/* artifact-hero: padding clamp(32px,5vw,72px) clamp(16px,3vw,48px) 0, borderBottom 2px black, grid 1fr auto gap 24px alignItems end */}
+      <div style={{
+        padding: 'clamp(32px,5vw,72px) clamp(16px,3vw,48px) 0',
+        borderBottom: '2px solid var(--black)',
+        display: 'grid', gridTemplateColumns: '1fr auto',
+        gap: '24px', alignItems: 'end',
+      }}>
         <div>
-          <div style={{ fontSize: 'clamp(64px,10vw,120px)', fontWeight: 900, lineHeight: 1, color: 'rgba(255,255,255,0.06)', letterSpacing: '-3px', marginBottom: '-12px' }}>01</div>
-          <div style={{ fontSize: 'clamp(28px,4vw,44px)', fontWeight: 900, textTransform: 'uppercase', color: 'white', letterSpacing: '-1px', lineHeight: 0.95 }}>{titulo}</div>
-          <div style={{ fontSize: '10px', fontWeight: 400, letterSpacing: '2px', textTransform: 'uppercase', color: 'var(--gray-400)', marginTop: '8px' }}>{dados.papel}</div>
-        </div>
-        <div>
-          {dados.meta && Object.entries(dados.meta).map(([k, v]: any) => (
-            <div key={k} style={{ display: 'flex', justifyContent: 'space-between', borderTop: '1px solid rgba(255,255,255,0.07)', paddingTop: '5px', marginTop: '5px', gap: '8px' }}>
-              <span style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase', color: 'var(--gray-400)' }}>{k}</span>
-              <span style={{ fontSize: '12px', fontWeight: 400, color: 'white', textAlign: 'right' }}>{v}</span>
-            </div>
-          ))}
-          {criado_em && (
-            <div style={{ display: 'flex', justifyContent: 'space-between', borderTop: '1px solid rgba(255,255,255,0.07)', paddingTop: '5px', marginTop: '5px' }}>
-              <span style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase', color: 'var(--gray-400)' }}>Criado</span>
-              <span style={{ fontSize: '12px', fontWeight: 400, color: 'white' }}>{new Date(criado_em).toLocaleDateString('pt-BR', { month: 'short', year: 'numeric' })}</span>
-            </div>
-          )}
-          {dados.citacao && (
-            <div style={{ fontSize: '12px', fontWeight: 300, fontStyle: 'italic', color: 'rgba(255,255,255,0.4)', lineHeight: 1.5, marginTop: '20px', borderLeft: '3px solid var(--coral)', paddingLeft: '10px' }}>
-              "{dados.citacao}"
-            </div>
-          )}
-        </div>
-      </div>
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr' }}>
-        {dados.blocos && dados.blocos.map((bloco: any, i: number) => (
-          <div key={i} style={{
-            padding: 'clamp(16px,3vw,28px)',
-            borderBottom: '1px solid var(--gray-200)',
-            borderRight: i % 2 === 0 ? '1px solid var(--gray-200)' : 'none',
-            gridColumn: bloco.full ? '1/-1' : undefined,
+          {/* artifact-type-tag: 9px 700 letterSpacing 3px uppercase gray-400 mb 16px flex alignItems center gap 10px */}
+          <div style={{
+            fontSize: '9px', fontWeight: 700, letterSpacing: '3px',
+            textTransform: 'uppercase', color: 'var(--gray-400)', marginBottom: '16px',
+            display: 'flex', alignItems: 'center', gap: '10px',
           }}>
-            <div style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '3px', textTransform: 'uppercase', color: bloco.label === 'Oportunidade de Design' ? 'var(--blue)' : 'var(--coral)', marginBottom: '12px' }}>{bloco.label}</div>
-            {bloco.itens && bloco.itens.map((item: string, j: number) => (
-              <div key={j} style={{ display: 'flex', gap: '10px', marginBottom: '7px' }}>
-                <div style={{ width: '4px', height: '4px', borderRadius: '50%', background: bloco.label === 'Oportunidade de Design' ? 'var(--blue)' : 'var(--black)', marginTop: '7px', flexShrink: 0 }}></div>
-                <span style={{ fontSize: 'clamp(11px,1.5vw,13px)', fontWeight: 300, lineHeight: 1.5 }}>{item}</span>
-              </div>
-            ))}
+            <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: 'var(--coral)' }}></div>
+            Research · Persona
           </div>
-        ))}
+          {/* artifact-hero-title: clamp(36px,8vw,96px) 900 uppercase letterSpacing -2px lineHeight 0.92 */}
+          <div style={{
+            fontSize: 'clamp(36px,8vw,96px)', fontWeight: 900,
+            textTransform: 'uppercase', letterSpacing: '-2px', lineHeight: 0.92,
+          }}>
+            {titulo}
+          </div>
+          {/* artifact-hero-sub: clamp(13px,1.8vw,16px) 300 gray-600 mt 16px lineHeight 1.6 */}
+          {dados.subtitulo && (
+            <div style={{ fontSize: 'clamp(13px,1.8vw,16px)', fontWeight: 300, color: 'var(--gray-600)', marginTop: '16px', lineHeight: 1.6 }}>
+              {dados.subtitulo}
+            </div>
+          )}
+        </div>
+
+        {/* artifact-hero-meta: textAlign right flexShrink 0 */}
+        {/* span: display block 9px 700 letterSpacing 2px uppercase gray-400 lineHeight 2.2 */}
+        {/* strong: black 500 12px letterSpacing 0 */}
+        <div style={{ textAlign: 'right', flexShrink: 0 }}>
+          {projeto_slug && (
+            <span style={{ display: 'block', fontSize: '9px', fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase', color: 'var(--gray-400)', lineHeight: 2.2 }}>
+              Projeto<strong style={{ color: 'var(--black)', fontWeight: 500, fontSize: '12px', letterSpacing: 0, display: 'inline', marginLeft: '4px' }}>{projeto_slug}</strong>
+            </span>
+          )}
+          {metodo_origem && (
+            <span style={{ display: 'block', fontSize: '9px', fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase', color: 'var(--gray-400)', lineHeight: 2.2 }}>
+              Método<strong style={{ color: 'var(--black)', fontWeight: 500, fontSize: '12px', letterSpacing: 0, display: 'inline', marginLeft: '4px' }}>{metodo_origem}</strong>
+            </span>
+          )}
+          {dataFormatada && (
+            <span style={{ display: 'block', fontSize: '9px', fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase', color: 'var(--gray-400)', lineHeight: 2.2 }}>
+              Criado<strong style={{ color: 'var(--black)', fontWeight: 500, fontSize: '12px', letterSpacing: 0, display: 'inline', marginLeft: '4px' }}>{dataFormatada}</strong>
+            </span>
+          )}
+          {versao && (
+            <span style={{ display: 'block', fontSize: '9px', fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase', color: 'var(--gray-400)', lineHeight: 2.2 }}>
+              Versão<strong style={{ color: 'var(--black)', fontWeight: 500, fontSize: '12px', letterSpacing: 0, display: 'inline', marginLeft: '4px' }}>{versao}</strong>
+            </span>
+          )}
+        </div>
       </div>
-    </div>
+
+      {/* persona-layout: grid clamp(200px,25vw,300px) 1fr, borderBottom 1px */}
+      <div style={{
+        display: 'grid', gridTemplateColumns: 'clamp(200px,25vw,300px) 1fr',
+        borderBottom: '1px solid var(--gray-200)',
+      }}>
+        {/* persona-sidebar: black bg, padding clamp(24px,4vw,40px), flex col justify space-between, minHeight clamp(280px,40vw,420px) */}
+        <div style={{
+          background: 'var(--black)', padding: 'clamp(24px,4vw,40px)',
+          display: 'flex', flexDirection: 'column', justifyContent: 'space-between',
+          minHeight: 'clamp(280px,40vw,420px)',
+        }}>
+          <div>
+            {/* persona-sidebar-num: clamp(64px,10vw,120px) 900 lineHeight 1 rgba(255,255,255,0.06) letterSpacing -3px mb -12px */}
+            <div style={{ fontSize: 'clamp(64px,10vw,120px)', fontWeight: 900, lineHeight: 1, color: 'rgba(255,255,255,0.06)', letterSpacing: '-3px', marginBottom: '-12px' }}>01</div>
+            {/* persona-sidebar-name: clamp(28px,4vw,44px) 900 uppercase white letterSpacing -1px lineHeight 0.95 */}
+            <div style={{ fontSize: 'clamp(28px,4vw,44px)', fontWeight: 900, textTransform: 'uppercase', color: 'var(--white)', letterSpacing: '-1px', lineHeight: 0.95 }}>{titulo}</div>
+            {/* persona-sidebar-role: 10px 400 letterSpacing 2px uppercase gray-400 mt 8px */}
+            <div style={{ fontSize: '10px', fontWeight: 400, letterSpacing: '2px', textTransform: 'uppercase', color: 'var(--gray-400)', marginTop: '8px' }}>{dados.papel}</div>
+          </div>
+          <div>
+            {/* persona-sidebar-meta: flex col gap 5px mt 28px */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '5px', marginTop: '28px' }}>
+              {dados.meta && Object.entries(dados.meta).map(([k, v]: any) => (
+                /* persona-sidebar-row: flex justify space-between alignItems baseline borderTop 1px rgba(255,255,255,0.07) pt 5px gap 8px */
+                <div key={k} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', borderTop: '1px solid rgba(255,255,255,0.07)', paddingTop: '5px', gap: '8px' }}>
+                  {/* persona-sidebar-key: 9px 700 letterSpacing 2px uppercase gray-400 flexShrink 0 */}
+                  <span style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase', color: 'var(--gray-400)', flexShrink: 0 }}>{k}</span>
+                  {/* persona-sidebar-val: 12px 400 white textAlign right */}
+                  <span style={{ fontSize: '12px', fontWeight: 400, color: 'var(--white)', textAlign: 'right' }}>{v}</span>
+                </div>
+              ))}
+            </div>
+            {/* persona-sidebar-quote: 12px 300 italic rgba(255,255,255,0.4) lineHeight 1.5 mt 20px borderLeft 3px coral pl 10px */}
+            {dados.citacao && (
+              <div style={{ fontSize: '12px', fontWeight: 300, fontStyle: 'italic', color: 'rgba(255,255,255,0.4)', lineHeight: 1.5, marginTop: '20px', borderLeft: '3px solid var(--coral)', paddingLeft: '10px' }}>
+                "{dados.citacao}"
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* persona-content: grid 1fr 1fr */}
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr' }}>
+          {dados.blocos && dados.blocos.map((bloco: any, i: number) => {
+            const isOportunidade = bloco.label?.toLowerCase().includes('oportunidade')
+            return (
+              <div key={i} style={{
+                /* persona-block-full: gridColumn 1/-1, padding clamp(16px,3vw,28px), borderBottom 1px */
+                /* persona-block: padding clamp(16px,3vw,28px), borderBottom 1px, borderRight 1px */
+                /* nth-child(2n): borderRight none */
+                /* nth-last-child(1,2): borderBottom none */
+                padding: 'clamp(16px,3vw,28px)',
+                borderBottom: '1px solid var(--gray-200)',
+                borderRight: bloco.full ? 'none' : (i % 2 === 0 ? '1px solid var(--gray-200)' : 'none'),
+                gridColumn: bloco.full ? '1/-1' : undefined,
+              }}>
+                {/* block-label: 9px 700 letterSpacing 3px uppercase coral mb 12px */}
+                <div style={{
+                  fontSize: '9px', fontWeight: 700, letterSpacing: '3px',
+                  textTransform: 'uppercase',
+                  color: isOportunidade ? 'var(--coral)' : 'var(--coral)',
+                  marginBottom: '12px',
+                }}>{bloco.label}</div>
+
+                {/* block-items: flex col gap 7px */}
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '7px' }}>
+                  {bloco.itens && bloco.itens.map((item: string, j: number) => (
+                    /* b-item: flex alignItems flex-start gap 10px */
+                    <div key={j} style={{ display: 'flex', alignItems: 'flex-start', gap: '10px' }}>
+                      {/* b-dot: 4px circle black mt 7px flexShrink 0 — coral para oportunidade */}
+                      <div style={{
+                        width: '4px', height: '4px', borderRadius: '50%',
+                        background: isOportunidade ? 'var(--coral)' : 'var(--black)',
+                        marginTop: '7px', flexShrink: 0,
+                      }}></div>
+                      {/* b-text: clamp(11px,1.5vw,13px) 300 lineHeight 1.5 */}
+                      <span style={{ fontSize: 'clamp(11px,1.5vw,13px)', fontWeight: 300, lineHeight: 1.5 }}>{item}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )
+          })}
+        </div>
+      </div>
+    </>
   )
 }
-
 
 function JourneyMap({ dados, futuro }: { dados: any; futuro?: boolean }) {
   const headerBg = futuro ? 'var(--blue)' : 'var(--black)'
@@ -111,8 +217,7 @@ function JourneyMap({ dados, futuro }: { dados: any; futuro?: boolean }) {
               </td>
               {linha.celulas && linha.celulas.map((cel: string, j: number) => (
                 <td key={j} style={{
-                  padding: '14px 16px',
-                  borderBottom: '1px solid var(--gray-200)',
+                  padding: '14px 16px', borderBottom: '1px solid var(--gray-200)',
                   fontStyle: linha.tipo === 'pensamento' ? 'italic' : 'normal',
                   color: linha.tipo === 'oportunidade' ? 'var(--blue)' : linha.tipo === 'pensamento' ? 'var(--gray-600)' : 'var(--black)',
                   background: linha.tipo === 'emocao' ? stageBg : 'transparent',
@@ -156,9 +261,7 @@ function SystemMap({ dados }: { dados: any }) {
           return (
             <g key={i}>
               <line x1={x1} y1={y1} x2={x2} y2={y2} stroke="var(--gray-200)" strokeWidth="1.5" />
-              {rel.label && (
-                <text x={(x1 + x2) / 2} y={(y1 + y2) / 2} textAnchor="middle" fontSize="9" fill="var(--gray-400)" fontFamily="DM Sans, sans-serif" fontWeight="600">{rel.label}</text>
-              )}
+              {rel.label && <text x={(x1 + x2) / 2} y={(y1 + y2) / 2} textAnchor="middle" fontSize="9" fill="var(--gray-400)" fontFamily="DM Sans, sans-serif" fontWeight="600">{rel.label}</text>}
             </g>
           )
         })}
@@ -166,10 +269,9 @@ function SystemMap({ dados }: { dados: any }) {
           const x = i === 0 ? 400 : cx(i)
           const y = i === 0 ? 300 : cy(i)
           const cor = ator.tipo === 'central' ? 'var(--black)' : ator.tipo === 'primario' ? 'var(--green)' : 'var(--gray-400)'
-          const radius = ator.tipo === 'central' ? 40 : 28
           return (
             <g key={i}>
-              <circle cx={x} cy={y} r={radius} fill={cor} />
+              <circle cx={x} cy={y} r={ator.tipo === 'central' ? 40 : 28} fill={cor} />
               <text x={x} y={y + 4} textAnchor="middle" fontSize={ator.tipo === 'central' ? '11' : '10'} fill="white" fontFamily="DM Sans, sans-serif" fontWeight="700">
                 {ator.nome.length > 12 ? ator.nome.substring(0, 10) + '…' : ator.nome}
               </text>
@@ -348,7 +450,7 @@ function ResearchReport({ dados }: { dados: any }) {
           <div style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '3px', textTransform: 'uppercase', color: 'var(--gray-400)', marginBottom: '24px' }}>Visualizações</div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)' }}>
             {dados.visualizacoes.map((v: any, i: number) => (
-              <Link key={i} href={`/artefatos/${v.slug}`} style={{ padding: 'clamp(16px,2vw,24px)', borderRight: (i + 1) % 3 !== 0 ? '1px solid var(--gray-200)' : 'none', borderBottom: '1px solid var(--gray-200)', display: 'block' }}>
+              <Link key={i} href={`/artefatos/${v.slug}`} style={{ padding: 'clamp(16px,2vw,24px)', borderRight: (i + 1) % 3 !== 0 ? '1px solid var(--gray-200)' : 'none', borderBottom: '1px solid var(--gray-200)', display: 'block', textDecoration: 'none', color: 'var(--black)' }}>
                 <div style={{ width: '24px', height: '4px', borderRadius: '2px', background: CORES[v.tipo] || 'var(--gray-400)', marginBottom: '12px' }}></div>
                 <div style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase', color: 'var(--gray-400)', marginBottom: '6px' }}>{v.tipo}</div>
                 <div style={{ fontSize: '13px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '-0.3px' }}>{v.titulo}</div>
@@ -364,43 +466,63 @@ function ResearchReport({ dados }: { dados: any }) {
 export default async function ArtefatoPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
   const artefato = await getArtefato(slug)
-  
   if (!artefato) notFound()
   const cor = CORES[artefato.tipo] || 'var(--gray-400)'
 
   return (
     <>
       <Nav />
+
+      {/* BREADCRUMB */}
       <div style={{ padding: '12px clamp(16px,3vw,48px)', borderBottom: '1px solid var(--gray-200)', display: 'flex', gap: '8px', alignItems: 'center', fontSize: '11px', color: 'var(--gray-400)' }}>
-        <Link href="/">design.antoniobob.com</Link>
+        <Link href="/" style={{ color: 'var(--gray-400)', textDecoration: 'none', letterSpacing: '0.5px' }}>design.antoniobob.com</Link>
         <span style={{ color: 'var(--gray-200)' }}>→</span>
         {artefato.projeto_slug && (
           <>
-            <Link href={`/projetos/${artefato.projeto_slug}`}>{artefato.projeto_slug}</Link>
+            <Link href={`/projetos/${artefato.projeto_slug}`} style={{ color: 'var(--gray-400)', textDecoration: 'none', letterSpacing: '0.5px' }}>{artefato.projeto_slug}</Link>
             <span style={{ color: 'var(--gray-200)' }}>→</span>
           </>
         )}
         <span style={{ color: 'var(--black)', fontWeight: 500 }}>{artefato.titulo}</span>
       </div>
-      <div style={{ padding: 'clamp(32px,5vw,72px) clamp(16px,3vw,48px) 0', borderBottom: '2px solid var(--black)', display: 'grid', gridTemplateColumns: '1fr auto', gap: '24px', alignItems: 'end' }}>
-        <div>
-          <div style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '3px', textTransform: 'uppercase', color: 'var(--gray-400)', marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '10px' }}>
-            <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: cor }}></div>
-            {artefato.tipo.replace(/_/g, ' ')}
+
+      {/* Persona has its own hero built-in */}
+      {artefato.tipo === 'persona' && (
+        <Persona
+          dados={artefato.dados}
+          titulo={artefato.titulo}
+          criado_em={artefato.criado_em}
+          projeto_slug={artefato.projeto_slug}
+          metodo_origem={artefato.metodo_origem}
+          versao={artefato.versao}
+        />
+      )}
+
+      {/* All other artefatos use the standard hero */}
+      {artefato.tipo !== 'persona' && (
+        <div style={{
+          padding: 'clamp(32px,5vw,72px) clamp(16px,3vw,48px) 0',
+          borderBottom: '2px solid var(--black)',
+          display: 'grid', gridTemplateColumns: '1fr auto',
+          gap: '24px', alignItems: 'end',
+        }}>
+          <div>
+            <div style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '3px', textTransform: 'uppercase', color: 'var(--gray-400)', marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '10px' }}>
+              <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: cor }}></div>
+              {artefato.tipo.replace(/_/g, ' ')}
+            </div>
+            <div style={{ fontSize: 'clamp(36px,8vw,96px)', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '-2px', lineHeight: 0.92 }}>{artefato.titulo}</div>
+            {artefato.subtitulo && <div style={{ fontSize: 'clamp(13px,1.8vw,16px)', fontWeight: 300, color: 'var(--gray-600)', marginTop: '16px', lineHeight: 1.6 }}>{artefato.subtitulo}</div>}
           </div>
-          <div style={{ fontSize: 'clamp(36px,8vw,96px)', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '-2px', lineHeight: 0.92 }}>{artefato.titulo}</div>
-          {artefato.subtitulo && (
-            <div style={{ fontSize: 'clamp(13px,1.8vw,16px)', fontWeight: 300, color: 'var(--gray-600)', marginTop: '16px', lineHeight: 1.6 }}>{artefato.subtitulo}</div>
-          )}
+          <div style={{ textAlign: 'right', flexShrink: 0 }}>
+            {artefato.projeto_slug && <span style={{ display: 'block', fontSize: '9px', fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase', color: 'var(--gray-400)', lineHeight: 2.2 }}>Projeto<strong style={{ color: 'var(--black)', fontWeight: 500, fontSize: '12px', letterSpacing: 0, marginLeft: '4px' }}>{artefato.projeto_slug}</strong></span>}
+            {artefato.metodo_origem && <span style={{ display: 'block', fontSize: '9px', fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase', color: 'var(--gray-400)', lineHeight: 2.2 }}>Método<strong style={{ color: 'var(--black)', fontWeight: 500, fontSize: '12px', letterSpacing: 0, marginLeft: '4px' }}>{artefato.metodo_origem}</strong></span>}
+            {artefato.criado_em && <span style={{ display: 'block', fontSize: '9px', fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase', color: 'var(--gray-400)', lineHeight: 2.2 }}>Criado<strong style={{ color: 'var(--black)', fontWeight: 500, fontSize: '12px', letterSpacing: 0, marginLeft: '4px' }}>{new Date(artefato.criado_em).toLocaleDateString('pt-BR', { month: 'long', year: 'numeric' })}</strong></span>}
+            <span style={{ display: 'block', fontSize: '9px', fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase', color: 'var(--gray-400)', lineHeight: 2.2 }}>Versão<strong style={{ color: 'var(--black)', fontWeight: 500, fontSize: '12px', letterSpacing: 0, marginLeft: '4px' }}>{artefato.versao}</strong></span>
+          </div>
         </div>
-        <div style={{ textAlign: 'right', flexShrink: 0 }}>
-          {artefato.projeto_slug && <span style={{ display: 'block', fontSize: '9px', fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase', color: 'var(--gray-400)', lineHeight: 2.2 }}>Projeto <strong style={{ color: 'var(--black)', fontWeight: 500, fontSize: '12px', letterSpacing: 0 }}>{artefato.projeto_slug}</strong></span>}
-          {artefato.metodo_origem && <span style={{ display: 'block', fontSize: '9px', fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase', color: 'var(--gray-400)', lineHeight: 2.2 }}>Método <strong style={{ color: 'var(--black)', fontWeight: 500, fontSize: '12px', letterSpacing: 0 }}>{artefato.metodo_origem}</strong></span>}
-          <span style={{ display: 'block', fontSize: '9px', fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase', color: 'var(--gray-400)', lineHeight: 2.2 }}>Versão <strong style={{ color: 'var(--black)', fontWeight: 500, fontSize: '12px', letterSpacing: 0 }}>{artefato.versao}</strong></span>
-          <span style={{ display: 'block', fontSize: '9px', fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase', color: 'var(--gray-400)', lineHeight: 2.2 }}>Criado <strong style={{ color: 'var(--black)', fontWeight: 500, fontSize: '12px', letterSpacing: 0 }}>{new Date(artefato.criado_em).toLocaleDateString('pt-BR', { month: 'long', year: 'numeric' })}</strong></span>
-        </div>
-      </div>
-      {artefato.tipo === 'persona' && <Persona dados={artefato.dados} titulo={artefato.titulo} />}
+      )}
+
       {artefato.tipo === 'journey_map' && <JourneyMap dados={artefato.dados} />}
       {artefato.tipo === 'future_journey_map' && <JourneyMap dados={artefato.dados} futuro={true} />}
       {artefato.tipo === 'system_map' && <SystemMap dados={artefato.dados} />}
