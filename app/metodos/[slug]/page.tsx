@@ -152,7 +152,7 @@ export default async function MetodoPage({ params }: { params: Promise<{ slug: s
                         <div style={{ fontSize: '13px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '8px' }}>{passo.titulo}</div>
                       )}
                       {/* step-text: 13px 300 gray-600 lineHeight 1.7 */}
-                      <div style={{ fontSize: '13px', fontWeight: 300, color: 'var(--gray-600)', lineHeight: 1.7 }}>{passo.texto || passo}</div>
+                      <div style={{ fontSize: '13px', fontWeight: 300, color: 'var(--gray-600)', lineHeight: 1.7 }}>{passo.texto || passo.descricao || (typeof passo === 'string' ? passo : '')}</div>
                     </div>
                   </div>
                 ))}
