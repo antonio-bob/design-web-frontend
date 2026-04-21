@@ -125,7 +125,7 @@ export default async function MetodoPage({ params }: { params: Promise<{ slug: s
         <div style={{ padding: 'clamp(32px,4vw,56px) clamp(16px,3vw,48px)', borderRight: '1px solid var(--gray-200)' }}>
 
           {/* PASSO A PASSO */}
-          {metodo.passos && metodo.passos.length > 0 && (
+          {metodo.passos && Array.isArray(metodo.passos) && metodo.passos.length > 0 && (
             <div style={{ marginBottom: '48px' }}>
               {/* content-label: 9px 700 letterSpacing 3px uppercase gray-400 mb 24px flex gap 10px + line */}
               <div style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '3px', textTransform: 'uppercase', color: 'var(--gray-400)', marginBottom: '24px', display: 'flex', alignItems: 'center', gap: '10px' }}>
@@ -161,7 +161,7 @@ export default async function MetodoPage({ params }: { params: Promise<{ slug: s
           )}
 
           {/* VARIAÇÕES */}
-          {metodo.variacoes && metodo.variacoes.length > 0 && (
+          {metodo.variacoes && Array.isArray(metodo.variacoes) && metodo.variacoes.length > 0 && (
             <div style={{ marginBottom: '48px' }}>
               {metodo.variacoes.map((v: any, i: number) => (
                 /* variation-box: gray-100 bg, padding 24px, mt 32px */
@@ -176,7 +176,7 @@ export default async function MetodoPage({ params }: { params: Promise<{ slug: s
           )}
 
           {/* NOTAS DO MÉTODO */}
-          {metodo.notas && metodo.notas.length > 0 && (
+          {metodo.notas && Array.isArray(metodo.notas) && metodo.notas.length > 0 && (
             <div style={{ marginBottom: '48px', marginTop: metodo.variacoes?.length ? '32px' : '0' }}>
               <div style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '3px', textTransform: 'uppercase', color: 'var(--gray-400)', marginBottom: '24px', display: 'flex', alignItems: 'center', gap: '10px' }}>
                 Notas do método
@@ -223,7 +223,7 @@ export default async function MetodoPage({ params }: { params: Promise<{ slug: s
         <div style={{ padding: 'clamp(24px,3vw,40px) clamp(16px,3vw,32px)' }}>
 
           {/* MATERIAIS */}
-          {metodo.materiais && metodo.materiais.length > 0 && (
+          {metodo.materiais && Array.isArray(metodo.materiais) && metodo.materiais.length > 0 && (
             <div style={{ marginBottom: '40px' }}>
               <div style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '3px', textTransform: 'uppercase', color: 'var(--gray-400)', marginBottom: '24px', display: 'flex', alignItems: 'center', gap: '10px' }}>
                 Materiais
