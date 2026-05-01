@@ -4,7 +4,7 @@ export default function Nav() {
   return (
     <nav style={{
       width: '100%',
-      background: 'var(--black)',
+      background: 'var(--twilight-indigo)',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'space-between',
