@@ -38,7 +38,7 @@ export default async function ProjetoPage({ params }: { params: Promise<{ slug: 
         borderBottom: '1px solid var(--gray-200)',
         display: 'flex', gap: '8px', alignItems: 'center',
       }}>
-        <Link href="/" style={{ fontSize: '11px', fontWeight: 400, color: 'var(--gray-400)', textDecoration: 'none', letterSpacing: '0.5px' }}>design.antoniobob.com</Link>
+        <Link href="/" style={{ fontSize: '11px', fontWeight: 400, color: 'var(--gray-400)', textDecoration: 'none', letterSpacing: '0.5px' }}>Home</Link>
         <span style={{ color: 'var(--gray-200)', fontSize: '11px' }}>→</span>
         <span style={{ fontSize: '11px', fontWeight: 500, color: 'var(--black)' }}>{projeto.nome}</span>
       </div>

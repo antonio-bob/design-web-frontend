@@ -475,7 +475,7 @@ export default async function ArtefatoPage({ params }: { params: Promise<{ slug:
 
       {/* BREADCRUMB */}
       <div style={{ padding: '12px clamp(16px,3vw,48px)', borderBottom: '1px solid var(--gray-200)', display: 'flex', gap: '8px', alignItems: 'center', fontSize: '11px', color: 'var(--gray-400)' }}>
-        <Link href="/" style={{ color: 'var(--gray-400)', textDecoration: 'none', letterSpacing: '0.5px' }}>design.antoniobob.com</Link>
+        <Link href="/" style={{ color: 'var(--gray-400)', textDecoration: 'none', letterSpacing: '0.5px' }}>Home</Link>
         <span style={{ color: 'var(--gray-200)' }}>→</span>
         {artefato.projeto_slug && (
           <>

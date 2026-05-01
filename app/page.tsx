@@ -18,14 +18,14 @@ export default async function Home() {
       <Nav />
 
       {/* HERO */}
-      <div style={{ padding: 'clamp(48px,8vw,120px) clamp(16px,3vw,48px) 0', borderBottom: '2px solid var(--black)' }}>
-        <div style={{ fontSize: 'clamp(48px,12vw,160px)', fontWeight: 900, lineHeight: 0.88, textTransform: 'uppercase', letterSpacing: '-3px' }}>
+      <div style={{ backgroundColor: 'var(--teal)', padding: 'clamp(48px,8vw,120px) clamp(16px,3vw,48px) 0', borderBottom: '2px solid var(--gray-100)' }}>
+        <div style={{ color: 'var(--eggshell)', fontSize: 'clamp(48px,12vw,160px)', fontWeight: 900, lineHeight: 0.88, textTransform: 'uppercase', letterSpacing: '-3px' }}>
           DESIGN<br />MEMORY
         </div>
-        <div style={{ fontSize: 'clamp(13px,1.8vw,16px)', fontWeight: 300, color: 'var(--gray-600)', marginTop: '24px', maxWidth: '560px', lineHeight: 1.6 }}>
+        <div style={{ fontSize: 'clamp(13px,1.8vw,16px)', fontWeight: 300, color: 'var(--black)', marginTop: '24px', maxWidth: '560px', lineHeight: 1.6 }}>
           Base de conhecimento em Service Design. Métodos, artefatos e notas de aplicação organizados por fase do processo.
         </div>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', padding: 'clamp(16px,2vw,24px) 0', borderTop: '1px solid var(--gray-200)', marginTop: '32px', flexWrap: 'wrap', gap: '16px' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', padding: 'clamp(16px,2vw,24px) 0', borderTop: '1px solid var(--eggshell)', marginTop: '32px', flexWrap: 'wrap', gap: '16px' }}>
           {[
             { label: 'Fases', val: '4' },
             { label: 'Métodos', val: '56' },
@@ -34,7 +34,7 @@ export default async function Home() {
             { label: 'Pesquisador', val: 'Antonio Farias · FAU USP' },
           ].map(item => (
             <div key={item.label}>
-              <div style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase', color: 'var(--gray-400)' }}>{item.label}</div>
+              <div style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase', color: 'var(--eggshell)' }}>{item.label}</div>
               <div style={{ fontSize: '13px', fontWeight: 400, marginTop: '4px' }}>{item.val}</div>
             </div>
           ))}

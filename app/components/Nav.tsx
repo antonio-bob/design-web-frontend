@@ -21,7 +21,7 @@ export default function Nav() {
         textTransform: 'uppercase',
         color: 'var(--white)',
       }}>
-        design.antoniobob.com
+        home
       </Link>
       <div style={{ display: 'flex', gap: 'clamp(16px,3vw,40px)' }}>
         {['research','ideation','prototyping','facilitation'].map(fase => (
@@ -30,7 +30,7 @@ export default function Nav() {
             fontWeight: 400,
             letterSpacing: '1.5px',
             textTransform: 'uppercase',
-            color: 'var(--gray-400)',
+            color: 'var(--gray-200)',
           }}>
             {fase}
           </Link>

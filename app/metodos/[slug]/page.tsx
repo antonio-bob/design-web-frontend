@@ -39,7 +39,7 @@ export default async function MetodoPage({ params }: { params: Promise<{ slug: s
         borderBottom: '1px solid var(--gray-200)',
         display: 'flex', gap: '8px', alignItems: 'center',
       }}>
-        <Link href="/" style={{ fontSize: '11px', fontWeight: 400, color: 'var(--gray-400)', textDecoration: 'none', letterSpacing: '0.5px' }}>design.antoniobob.com</Link>
+        <Link href="/" style={{ fontSize: '11px', fontWeight: 400, color: 'var(--gray-400)', textDecoration: 'none', letterSpacing: '0.5px' }}>Home</Link>
         <span style={{ color: 'var(--gray-200)', fontSize: '11px' }}>→</span>
         <Link href={`/metodos?fase=${metodo.fase}`} style={{ fontSize: '11px', fontWeight: 400, color: 'var(--gray-400)', textDecoration: 'none', letterSpacing: '0.5px', textTransform: 'capitalize' }}>{metodo.fase}</Link>
         <span style={{ color: 'var(--gray-200)', fontSize: '11px' }}>→</span>
@@ -54,8 +54,7 @@ export default async function MetodoPage({ params }: { params: Promise<{ slug: s
       }}>
         {/* method-phase-tag: 9px 700 letterSpacing 3px uppercase gray-400 mb 16px flex alignItems center gap 10px */}
         <div style={{
-          fontSize: '9px', fontWeight: 700, letterSpacing: '3px',
-          textTransform: 'uppercase', color: 'var(--gray-400)', marginBottom: '16px',
+          fontSize: '9px', fontWeight: 700, letterSpacing: '3px', color: 'var(--gray-400)', marginBottom: '16px',
           display: 'flex', alignItems: 'center', gap: '10px',
         }}>
           {/* method-phase-dot: 8px circle */}
@@ -75,7 +74,7 @@ export default async function MetodoPage({ params }: { params: Promise<{ slug: s
         {/* method-hero-title: clamp(36px,8vw,96px) 900 uppercase letterSpacing -2px lineHeight 0.92 */}
         <div style={{
           fontSize: 'clamp(36px,8vw,96px)', fontWeight: 900,
-          textTransform: 'uppercase', letterSpacing: '-2px', lineHeight: 0.92,
+          letterSpacing: '-2px', lineHeight: 0.92,
         }}>
           {metodo.nome}
         </div>

@@ -11,16 +11,22 @@
   --blue:    #4a7fd4;
   --green:   #2e8b5a;
   --yellow:  #f0c030;
+  --teal:    #81b29a;
+  --eggshell: #f4f1de;
   --font: 'DM Sans', sans-serif;
+  --ssa-font-stacks-arial: Arial, "Helvetica Neue", Helvetica, sans-serif;
+  --ssa-font-stacks-freight-text: freight-text-pro, Georgia, serif;
+  --ssa-font-stacks-neue-haas-grotesk-text: neue-haas-grotesk-text, Helvetica, sans-serif;
+  --ssa-font-stacks-playfair-display: "Playfair Display", serif;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
 html, body {
   width: 100%;
-  background: var(--white);
+  background: var(--eggshell);
   color: var(--black);
-  font-family: var(--font);
+  font-family: var(--ssa-font-stacks-playfair-display);
   -webkit-font-smoothing: antialiased;
 }
 
