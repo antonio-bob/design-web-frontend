@@ -71,7 +71,7 @@ export default async function ArtefatoPage({ params }: { params: Promise<{ slug:
               <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: cor }}></div>
               {artefato.tipo.replace(/_/g, ' ')}
             </div>
-            <div style={{ fontSize: 'clamp(36px,8vw,96px)', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '-2px', lineHeight: 0.92 }}>{artefato.titulo}</div>
+            <div style={{ fontSize: 'clamp(36px,8vw,96px)', fontWeight: 900, letterSpacing: '-2px', lineHeight: 0.92 }}>{artefato.titulo}</div>
             {artefato.subtitulo && <div style={{ fontSize: 'clamp(13px,1.8vw,16px)', fontWeight: 300, color: 'var(--gray-600)', marginTop: '16px', lineHeight: 1.6 }}>{artefato.subtitulo}</div>}
           </div>
           <div style={{ textAlign: 'right', flexShrink: 0 }}>

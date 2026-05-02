@@ -6,31 +6,7 @@ export default function JourneyMap({ dados, futuro }: { dados: any; futuro?: boo
 
   return (
     <div style={{ borderBottom: '1px solid var(--gray-200)', overflowX: 'auto' }}>
-      <div style={{
-        background: '#4a7fd4',
-        padding: 'clamp(20px,3vw,32px)',
-        display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between',
-        gap: '24px', flexWrap: 'wrap',
-      }}>
-        <div>
-          {futuro && (
-            <div style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '3px', textTransform: 'uppercase', color: 'rgba(255,255,255,0.6)', marginBottom: '8px' }}>
-              Future State
-            </div>
-          )}
-          <div style={{ fontSize: 'clamp(24px,5vw,44px)', fontWeight: 900, textTransform: 'uppercase', color: 'var(--softSand)', letterSpacing: '-1px', lineHeight: 1 }}>
-            {dados.titulo || 'Journey Map'}
-          </div>
-        </div>
-        <div style={{ display: 'flex', gap: 'clamp(16px,3vw,40px)', flexWrap: 'wrap' }}>
-          {dados.meta && Object.entries(dados.meta).map(([k, v]: any) => (
-            <div key={k}>
-              <span style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase', color: 'bl', display: 'block' }}>{k}</span>
-              <span style={{ fontSize: '12px', fontWeight: 400, color: '#edede9' }}>{v}</span>
-            </div>
-          ))}
-        </div>
-      </div>
+      
 
       <table style={{ width: '100%', minWidth: '700px', borderCollapse: 'collapse' }}>
         <thead>

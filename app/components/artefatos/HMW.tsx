@@ -19,7 +19,7 @@ export default function HMW({ dados }: { dados: any }) {
               borderBottom: '1px solid var(--gray-200)',
             }}>
               <div style={{ fontSize: 'clamp(40px,6vw,64px)', fontWeight: 900, color: 'var(--gray-200)', lineHeight: 1, marginBottom: '6px', letterSpacing: '-2px' }}>0{i + 1}</div>
-              <div style={{ fontSize: 'clamp(14px,2vw,18px)', fontWeight: 700, textTransform: 'uppercase', lineHeight: 1.2 }}>{texto}</div>
+              <div style={{ fontSize: 'clamp(14px,2vw,18px)', fontWeight: 500, lineHeight: 1.2 }}>{texto}</div>
               {sub && <div style={{ fontSize: '12px', fontWeight: 300, color: 'var(--gray-600)', marginTop: '8px', lineHeight: 1.5 }}>{sub}</div>}
             </div>
           )
