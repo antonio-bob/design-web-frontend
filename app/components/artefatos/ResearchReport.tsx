@@ -46,7 +46,7 @@ export default function ResearchReport({ dados }: { dados: any }) {
             <div style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '3px', textTransform: 'uppercase', color: 'var(--gray-400)', marginBottom: '24px' }}>Processo de Pesquisa</div>
             {processo.map((p: any, i: number) => (
               <div key={i} style={{ display: 'grid', gridTemplateColumns: '48px 1fr', marginBottom: '20px' }}>
-                <div style={{ fontSize: 'clamp(24px,4vw,36px)', fontWeight: 900, color: 'var(--gray-100)', lineHeight: 1, letterSpacing: '-1px' }}>0{i + 1}</div>
+                <div style={{ fontSize: 'clamp(24px,4vw,36px)', fontWeight: 900, color: 'var(--gray-200)', lineHeight: 1, letterSpacing: '-1px' }}>0{i + 1}</div>
                 <div>
                   <div style={{ fontSize: '12px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '4px' }}>{p.etapa}</div>
                   <div style={{ fontSize: '12px', fontWeight: 300, color: 'var(--gray-600)', lineHeight: 1.5 }}>{p.descricao}</div>
@@ -62,7 +62,7 @@ export default function ResearchReport({ dados }: { dados: any }) {
             <div style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '3px', textTransform: 'uppercase', color: 'var(--gray-400)', marginBottom: '24px' }}>Key Findings</div>
             {findings.map((f: string, i: number) => (
               <div key={i} style={{ display: 'flex', gap: '16px', marginBottom: '16px', paddingBottom: '16px', borderBottom: '1px solid var(--gray-100)' }}>
-                <div style={{ fontSize: 'clamp(24px,3vw,32px)', fontWeight: 900, color: 'var(--gray-100)', lineHeight: 1, flexShrink: 0, letterSpacing: '-1px' }}>0{i + 1}</div>
+                <div style={{ fontSize: 'clamp(24px,3vw,32px)', fontWeight: 900, color: 'var(--gray-200)', lineHeight: 1, flexShrink: 0, letterSpacing: '-1px' }}>0{i + 1}</div>
                 <div style={{ fontSize: 'clamp(13px,1.8vw,15px)', fontWeight: 400, lineHeight: 1.5 }}>{f}</div>
               </div>
             ))}

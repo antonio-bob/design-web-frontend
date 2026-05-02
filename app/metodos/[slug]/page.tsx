@@ -60,7 +60,7 @@ export default async function MetodoPage({ params }: { params: Promise<{ slug: s
         {/* Número decorativo — oculto no mobile via inline */}
         <div style={{
           fontSize: 'clamp(80px,18vw,220px)', fontWeight: 900,
-          lineHeight: 1, color: 'var(--gray-100)', letterSpacing: '-6px',
+          lineHeight: 1, color: 'var(--gray-200)', letterSpacing: '-6px',
           float: 'right', marginTop: '-16px', marginLeft: '24px',
         }}>
           {metodo.numero}

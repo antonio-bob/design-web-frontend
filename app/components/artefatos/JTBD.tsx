@@ -16,7 +16,7 @@ export default function JTBD({ dados }: { dados: any }) {
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)' }}>
           {dados.jobs.map((job: any, i: number) => (
             <div key={i} style={{ padding: 'clamp(20px,3vw,32px)', borderRight: (i + 1) % 3 !== 0 ? '1px solid var(--gray-200)' : 'none', borderBottom: '1px solid var(--gray-200)' }}>
-              <div style={{ fontSize: 'clamp(40px,6vw,56px)', fontWeight: 900, color: 'var(--gray-100)', lineHeight: 1, marginBottom: '12px', letterSpacing: '-2px' }}>0{i + 1}</div>
+              <div style={{ fontSize: 'clamp(40px,6vw,56px)', fontWeight: 900, color: 'var(--gray-200)', lineHeight: 1, marginBottom: '12px', letterSpacing: '-2px' }}>0{i + 1}</div>
               <div style={{ fontSize: 'clamp(12px,1.5vw,14px)', fontWeight: 300, lineHeight: 1.7 }}>
                 <span style={{ fontWeight: 600 }}>When </span>{job.situacao}
                 <span style={{ fontWeight: 600 }}>, I want to </span>{job.motivacao}
