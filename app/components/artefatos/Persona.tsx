@@ -10,7 +10,7 @@ export default function Persona({ dados, titulo, criado_em, projeto_slug, metodo
     <>
       <div style={{
         padding: 'clamp(32px,5vw,72px) clamp(16px,3vw,48px) 0',
-        borderBottom: '2px solid var(--black)',
+        borderBottom: '2px solid var(--twilight-indigo)',
         display: 'grid', gridTemplateColumns: '1fr auto',
         gap: '24px', alignItems: 'end',
       }}>
@@ -64,26 +64,26 @@ export default function Persona({ dados, titulo, criado_em, projeto_slug, metodo
         borderBottom: '1px solid var(--gray-200)',
       }}>
         <div style={{
-          background: 'var(--black)', padding: 'clamp(24px,4vw,40px)',
+          background: 'var(--coral)', padding: 'clamp(24px,4vw,40px)',
           display: 'flex', flexDirection: 'column', justifyContent: 'space-between',
           minHeight: 'clamp(280px,40vw,420px)',
         }}>
           <div>
-            <div style={{ fontSize: 'clamp(64px,10vw,120px)', fontWeight: 900, lineHeight: 1, color: 'rgba(255,255,255,0.06)', letterSpacing: '-3px', marginBottom: '-12px' }}>01</div>
+            <div style={{ fontSize: 'clamp(64px,10vw,120px)', fontWeight: 900, lineHeight: 1, color: 'rgba(255,255,255,0.09)', letterSpacing: '-3px', marginBottom: '-12px' }}>01</div>
             <div style={{ fontSize: 'clamp(28px,4vw,44px)', fontWeight: 900, textTransform: 'uppercase', color: 'var(--white)', letterSpacing: '-1px', lineHeight: 0.95 }}>{titulo}</div>
-            <div style={{ fontSize: '10px', fontWeight: 400, letterSpacing: '2px', textTransform: 'uppercase', color: 'var(--gray-400)', marginTop: '8px' }}>{dados.papel}</div>
+            <div style={{ fontSize: '10px', fontWeight: 400, letterSpacing: '2px', textTransform: 'uppercase', color: 'var(--soft-sand)', marginTop: '8px' }}>{dados.papel}</div>
           </div>
           <div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '5px', marginTop: '28px' }}>
               {dados.meta && Object.entries(dados.meta).map(([k, v]: any) => (
                 <div key={k} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', borderTop: '1px solid rgba(255,255,255,0.07)', paddingTop: '5px', gap: '8px' }}>
-                  <span style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase', color: 'var(--gray-400)', flexShrink: 0 }}>{k}</span>
-                  <span style={{ fontSize: '12px', fontWeight: 400, color: 'var(--white)', textAlign: 'right' }}>{v}</span>
+                  <span style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase', color: 'var(--soft-sand)', flexShrink: 0 }}>{k}</span>
+                  <span style={{ fontSize: '12px', fontWeight: 400, color: 'var(--soft-sand)', textAlign: 'right' }}>{v}</span>
                 </div>
               ))}
             </div>
             {dados.citacao && (
-              <div style={{ fontSize: '12px', fontWeight: 300, fontStyle: 'italic', color: 'rgba(255,255,255,0.4)', lineHeight: 1.5, marginTop: '20px', borderLeft: '3px solid var(--coral)', paddingLeft: '10px' }}>
+              <div style={{ fontSize: '12px', fontWeight: 300, fontStyle: 'italic', color: 'var(--soft-sand)', lineHeight: 1.5, marginTop: '20px', borderLeft: '3px solid var(--soft-sand)', paddingLeft: '10px' }}>
                 "{dados.citacao}"
               </div>
             )}
