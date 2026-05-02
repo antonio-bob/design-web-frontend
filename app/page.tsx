@@ -31,7 +31,7 @@ export default async function Home() {
             { label: 'Métodos', val: '56' },
             { label: 'Artefatos', val: artefatos.length.toString() },
             { label: 'Projetos', val: projetos.length.toString() },
-            { label: 'Pesquisador', val: 'Antonio Farias · FAU USP' },
+            { label: 'Pesquisador', val: 'Antonio Farias' },
           ].map(item => (
             <div key={item.label}>
               <div style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase' }}>{item.label}</div>
