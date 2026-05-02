@@ -29,6 +29,11 @@ export default async function ProjetoPage({ params }: { params: Promise<{ slug: 
   if (!projeto) notFound()
   const artefatos = await getArtefatos({ projeto: slug })
 
+  const hasInsights = artefatos.filter((a: any) => a.tipo === 'key_insight').length > 0
+  const insightsCount = artefatos.filter((a: any) => a.tipo === 'key_insight').length
+  const outros = artefatos.filter((a: any) => a.tipo !== 'key_insight')
+  const todosItems = hasInsights ? [{ _insights: true } as any, ...outros] : outros
+
   return (
     <>
       <Nav />
@@ -63,7 +68,6 @@ export default async function ProjetoPage({ params }: { params: Promise<{ slug: 
           {projeto.descricao}
         </div>
 
-        {/* INFO GRID — classes CSS controlam padding/border no mobile */}
         <div className="projeto-info-grid">
           {[
             { label: 'Status', val: projeto.status?.replace(/_/g, ' ') },
@@ -116,21 +120,43 @@ export default async function ProjetoPage({ params }: { params: Promise<{ slug: 
             </div>
           ) : (
             <div className="artifacts-grid">
-              {artefatos.map((a: any, i: number) => (
-                <Link key={a.slug} href={`/artefatos/${a.slug}`} style={{
-                  padding: 'clamp(20px,3vw,32px)',
-                  borderRight: i % 2 === 0 ? '1px solid var(--gray-200)' : 'none',
-                  borderBottom: '1px solid var(--gray-200)',
-                  textDecoration: 'none', color: 'var(--black)', display: 'block',
-                }}>
-                  <div style={{ width: '24px', height: '4px', borderRadius: '2px', background: CORES[a.tipo] || 'var(--gray-400)', marginBottom: '16px' }}></div>
-                  <div style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase', color: 'var(--gray-400)', marginBottom: '8px' }}>{a.tipo.replace(/_/g, ' ')}</div>
-                  <div style={{ fontSize: 'clamp(13px,2vw,18px)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '-0.3px', lineHeight: 1.2 }}>{a.titulo}</div>
-                  <div style={{ fontSize: '11px', fontWeight: 300, color: 'var(--gray-400)', marginTop: '8px' }}>
-                    {new Date(a.criado_em).toLocaleDateString('pt-BR', { month: 'short', year: 'numeric' })} · {a.versao}
-                  </div>
-                </Link>
-              ))}
+              {todosItems.map((a: any, i: number) => {
+                const borderRight = i % 2 === 0 ? '1px solid var(--gray-200)' : 'none'
+
+                if (a._insights) {
+                  return (
+                    <Link key="insights" href={`/projetos/${slug}/insights`} style={{
+                      padding: 'clamp(20px,3vw,32px)',
+                      borderRight,
+                      borderBottom: '1px solid var(--gray-200)',
+                      textDecoration: 'none', color: 'var(--black)', display: 'block',
+                    }}>
+                      <div style={{ width: '24px', height: '4px', borderRadius: '2px', background: 'var(--yellow)', marginBottom: '16px' }}></div>
+                      <div style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase', color: 'var(--gray-400)', marginBottom: '8px' }}>Key Insights</div>
+                      <div style={{ fontSize: 'clamp(13px,2vw,18px)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '-0.3px', lineHeight: 1.2 }}>
+                        {insightsCount} insights gerados
+                      </div>
+                      <div style={{ fontSize: '11px', fontWeight: 300, color: 'var(--gray-400)', marginTop: '8px' }}>Ver todos →</div>
+                    </Link>
+                  )
+                }
+
+                return (
+                  <Link key={a.slug} href={`/artefatos/${a.slug}`} style={{
+                    padding: 'clamp(20px,3vw,32px)',
+                    borderRight,
+                    borderBottom: '1px solid var(--gray-200)',
+                    textDecoration: 'none', color: 'var(--black)', display: 'block',
+                  }}>
+                    <div style={{ width: '24px', height: '4px', borderRadius: '2px', background: CORES[a.tipo] || 'var(--gray-400)', marginBottom: '16px' }}></div>
+                    <div style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase', color: 'var(--gray-400)', marginBottom: '8px' }}>{a.tipo.replace(/_/g, ' ')}</div>
+                    <div style={{ fontSize: 'clamp(13px,2vw,18px)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '-0.3px', lineHeight: 1.2 }}>{a.titulo}</div>
+                    <div style={{ fontSize: '11px', fontWeight: 300, color: 'var(--gray-400)', marginTop: '8px' }}>
+                      {new Date(a.criado_em).toLocaleDateString('pt-BR', { month: 'short', year: 'numeric' })} · {a.versao}
+                    </div>
+                  </Link>
+                )
+              })}
             </div>
           )}
         </div>
