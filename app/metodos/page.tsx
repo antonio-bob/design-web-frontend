@@ -35,7 +35,7 @@ export default async function MetodosPage({
           {['research', 'ideation', 'prototyping', 'facilitation'].map(f => (
             <Link key={f} href={`/metodos?fase=${f}`} style={{
               fontSize: '10px', fontWeight: 700, letterSpacing: '2px',
-              textTransform: 'uppercase', padding: '6px 14px',
+              textTransform: 'uppercase', padding: '7px 14px',
               border: `1px solid ${fase === f ? FASE_CORES[f] : 'var(--gray-200)'}`,
               color: fase === f ? FASE_CORES[f] : 'var(--gray-400)',
               textDecoration: 'none',
@@ -46,7 +46,7 @@ export default async function MetodosPage({
           ))}
           <Link href="/metodos" style={{
             fontSize: '10px', fontWeight: 700, letterSpacing: '2px',
-            textTransform: 'uppercase', padding: '6px 14px',
+            textTransform: 'uppercase', padding: '7px 14px',
             border: `1px solid ${!fase ? 'var(--black)' : 'var(--gray-200)'}`,
             color: !fase ? 'var(--black)' : 'var(--gray-400)',
             textDecoration: 'none',
@@ -62,7 +62,7 @@ export default async function MetodosPage({
           Nenhum método cadastrado ainda.
         </div>
       ) : (
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)' }}>
+        <div className="metodos-grid">
           {metodos.map((m: any) => (
             <Link key={m.slug} href={`/metodos/${m.slug}`} style={{
               padding: 'clamp(20px,3vw,32px)',
@@ -77,12 +77,12 @@ export default async function MetodosPage({
                 <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: FASE_CORES[m.fase] || 'var(--gray-400)', flexShrink: 0 }}></div>
                 <span style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase', color: 'var(--gray-400)' }}>{m.fase} · {m.numero}</span>
                 {m.gera_artefato && (
-                  <span style={{ fontSize: '8px', fontWeight: 700, letterSpacing: '1.5px', textTransform: 'uppercase', padding: '2px 6px', border: `1px solid ${FASE_CORES[m.fase]}`, color: FASE_CORES[m.fase], marginLeft: 'auto' }}>
+                  <span style={{ fontSize: '8px', fontWeight: 700, letterSpacing: '1.5px', textTransform: 'uppercase', padding: '2px 6px', border: `1px solid ${FASE_CORES[m.fase]}`, color: FASE_CORES[m.fase], marginLeft: 'auto', flexShrink: 0 }}>
                     Artefato
                   </span>
                 )}
               </div>
-              <div style={{ fontSize: 'clamp(14px,2vw,18px)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '-0.3px', lineHeight: 1.2, marginBottom: '8px' }}>{m.nome}</div>
+              <div style={{ fontSize: 'clamp(13px,2vw,18px)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '-0.3px', lineHeight: 1.2, marginBottom: '8px' }}>{m.nome}</div>
               {m.descricao && (
                 <div style={{ fontSize: '12px', fontWeight: 300, color: 'var(--gray-600)', lineHeight: 1.5, display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
                   {m.descricao}

@@ -19,7 +19,6 @@
   --apricot: #f2cc8f;
   --soft-sand: #edede9;
   --twilight-indigo: #3d405b;
-  /* FONTS */
   --font: 'DM Sans', sans-serif;
   --ssa-font-stacks-arial: Arial, "Helvetica Neue", Helvetica, sans-serif;
   --ssa-font-stacks-freight-text: freight-text-pro, Georgia, serif;
@@ -31,6 +30,7 @@
 
 html, body {
   width: 100%;
+  overflow-x: hidden;
   background: var(--eggshell);
   color: var(--gray-800);
   font-family: var(--ssa-font-stacks-playfair-display);
@@ -39,38 +39,141 @@ html, body {
 
 a { text-decoration: none; color: inherit; }
 
-/* ── GRIDS ── */
+/* ── NAV ── */
+.nav-links {
+  display: flex;
+  gap: clamp(16px,3vw,40px);
+}
+.nav-hamburger {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--gray-200);
+  padding: 4px;
+}
+.nav-mobile-menu {
+  display: none;
+  position: absolute;
+  top: 48px;
+  left: 0;
+  right: 0;
+  background: var(--twilight-indigo);
+  padding: 16px clamp(16px,3vw,48px);
+  flex-direction: column;
+  gap: 16px;
+  z-index: 99;
+  border-top: 1px solid rgba(255,255,255,0.1);
+}
+.nav-mobile-menu.open {
+  display: flex;
+}
+
+/* ── GRIDS DESKTOP ── */
 .fases-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   border-bottom: 1px solid var(--gray-200);
 }
-
 .projetos-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
 }
-
+.metodos-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
 .projeto-main-grid {
   display: grid;
   grid-template-columns: 1fr 320px;
   border-bottom: 1px solid var(--gray-200);
 }
-
 .projeto-info-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
+  margin-top: 32px;
+  border-top: 1px solid var(--gray-200);
 }
-
+.metodo-meta-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  margin-top: 32px;
+  border-top: 1px solid var(--gray-200);
+}
+.metodo-body-grid {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  border-bottom: 1px solid var(--gray-200);
+}
 .artifacts-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
 }
 
+/* ── NÚMERO DECORATIVO MÉTODO ── */
+.metodo-num-decorativo {
+  font-size: clamp(80px,18vw,220px);
+  font-weight: 900;
+  line-height: 1;
+  color: var(--gray-100);
+  letter-spacing: -6px;
+  float: right;
+  margin-top: -16px;
+  margin-left: 24px;
+}
+
+/* ── TABELA MARKDOWN ── */
+.md-content table {
+  display: block;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  width: 100%;
+}
+.md-content {
+  width: 100%;
+  min-width: 0;
+}
+
+/* ── MOBILE 768px ── */
 @media (max-width: 768px) {
-  .fases-grid { grid-template-columns: 1fr; }
+  .nav-links { display: none; }
+  .nav-hamburger { display: flex; align-items: center; justify-content: center; }
+
+  .fases-grid { grid-template-columns: 1fr 1fr; }
   .projetos-grid { grid-template-columns: 1fr; }
+  .metodos-grid { grid-template-columns: 1fr 1fr; }
   .projeto-main-grid { grid-template-columns: 1fr; }
-  .projeto-info-grid { grid-template-columns: repeat(2, 1fr); }
+  .projeto-info-grid { grid-template-columns: 1fr 1fr; }
+  .metodo-meta-grid { grid-template-columns: 1fr 1fr; }
+  .metodo-body-grid { grid-template-columns: 1fr; }
   .artifacts-grid { grid-template-columns: 1fr; }
+
+  /* Remove borders que causam overflow */
+  .projeto-main-grid > div { border-right: none !important; }
+  .metodo-body-grid > div { border-right: none !important; }
+
+  /* Sidebar vira seção abaixo */
+  .projeto-main-grid > div:last-child { border-top: 2px solid var(--black); }
+  .metodo-body-grid > div:last-child { border-top: 1px solid var(--gray-200); }
+
+  /* Info grids — padding controlado */
+  .projeto-info-grid > div,
+  .metodo-meta-grid > div {
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+    border-right: none !important;
+    border-bottom: 1px solid var(--gray-200);
+  }
+  .projeto-info-grid > div:nth-child(odd),
+  .metodo-meta-grid > div:nth-child(odd) {
+    border-right: 1px solid var(--gray-200) !important;
+  }
+
+  .metodo-num-decorativo { display: none; }
+}
+
+/* ── MOBILE 480px ── */
+@media (max-width: 480px) {
+  .fases-grid { grid-template-columns: 1fr; }
+  .metodos-grid { grid-template-columns: 1fr; }
 }

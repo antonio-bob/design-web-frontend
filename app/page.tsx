@@ -31,10 +31,10 @@ export default async function Home() {
             { label: 'Métodos', val: '56' },
             { label: 'Artefatos', val: artefatos.length.toString() },
             { label: 'Projetos', val: projetos.length.toString() },
-            { label: 'Pesquisador', val: 'Antonio Farias' },
+            { label: 'Pesquisador', val: 'Antonio Farias · FAU USP' },
           ].map(item => (
             <div key={item.label}>
-              <div style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase' }}>{item.label}</div>
+              <div style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase', color: 'var(--eggshell)', opacity: 0.7 }}>{item.label}</div>
               <div style={{ fontSize: '13px', fontWeight: 400, marginTop: '4px', color: 'var(--eggshell)' }}>{item.val}</div>
             </div>
           ))}
@@ -42,19 +42,19 @@ export default async function Home() {
       </div>
 
       {/* FASES */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)' }}>
-        {FASES.map(fase => (
+      <div className="fases-grid">
+        {FASES.map((fase, i) => (
           <Link key={fase.slug} href={`/metodos?fase=${fase.slug}`} style={{
             padding: 'clamp(24px,4vw,48px)',
-            borderRight: '1px solid var(--gray-200)',
+            borderRight: i < 3 ? '1px solid var(--gray-200)' : 'none',
             borderBottom: '1px solid var(--gray-200)',
             display: 'block',
             transition: 'background .15s',
           }}>
-            <div style={{ fontSize: 'clamp(48px,8vw,96px)', fontWeight: 900, lineHeight: 1, color: 'var(--gray-200)', letterSpacing: '-2px', marginBottom: '8px' }}>{fase.num}</div>
+            <div style={{ fontSize: 'clamp(40px,6vw,96px)', fontWeight: 900, lineHeight: 1, color: 'var(--gray-200)', letterSpacing: '-2px', marginBottom: '8px' }}>{fase.num}</div>
             <div style={{ width: '32px', height: '4px', borderRadius: '2px', background: fase.cor, marginBottom: '16px' }}></div>
             <div style={{ fontSize: 'clamp(18px,3vw,28px)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '-0.5px', lineHeight: 1 }}>{fase.nome}</div>
-            <div style={{ fontSize: '12px', fontWeight: 300, color: 'var(--gray-600)', lineHeight: 1.6, marginTop: '12px' }}>{fase.desc}</div>
+            <div style={{ fontSize: '13px', fontWeight: 300, color: 'var(--gray-600)', lineHeight: 1.6, marginTop: '12px' }}>{fase.desc}</div>
             <div style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase', color: 'var(--gray-400)', marginTop: '24px' }}>{fase.count}</div>
           </Link>
         ))}
@@ -62,11 +62,11 @@ export default async function Home() {
 
       {/* PROJETOS */}
       {projetos.length > 0 && (
-        <div style={{ borderTop: '2px solid var(--black)', marginTop: '0' }}>
+        <div style={{ borderTop: '2px solid var(--black)' }}>
           <div style={{ padding: 'clamp(16px,3vw,32px) clamp(16px,3vw,48px)', borderBottom: '1px solid var(--gray-200)', fontSize: '10px', fontWeight: 700, letterSpacing: '3px', textTransform: 'uppercase', color: 'var(--twilight-indigo)' }}>
             Projetos
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)' }}>
+          <div className="projetos-grid">
             {projetos.map((p: any) => (
               <Link key={p.slug} href={`/projetos/${p.slug}`} style={{
                 padding: 'clamp(20px,3vw,32px)',
@@ -74,9 +74,9 @@ export default async function Home() {
                 borderBottom: '1px solid var(--gray-200)',
                 display: 'block',
               }}>
-                <div style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase', color: 'var(--gray-400)', marginBottom: '8px' }}>{p.status}</div>
-                <div style={{ fontSize: 'clamp(16px,2.5vw,22px)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '-0.5px', lineHeight: 1.1 }}>{p.nome}</div>
-                <div style={{ fontSize: '12px', fontWeight: 300, color: 'var(--gray-600)', marginTop: '8px', lineHeight: 1.5 }}>{p.descricao}</div>
+                <div style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase', color: 'var(--gray-400)', marginBottom: '8px' }}>{p.status?.replace(/_/g,' ')}</div>
+                <div style={{ fontSize: 'clamp(16px,2.5vw,22px)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '-0.5px', lineHeight: 1.1, marginBottom: '8px' }}>{p.nome}</div>
+                <div style={{ fontSize: '13px', fontWeight: 300, color: 'var(--gray-600)', lineHeight: 1.5 }}>{p.descricao}</div>
               </Link>
             ))}
           </div>
