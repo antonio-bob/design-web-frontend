@@ -10,7 +10,6 @@ export default async function InsightsPage({ params }: { params: Promise<{ slug:
 
   const artefatos = await getArtefatos({ projeto: slug, tipo: 'key_insight' })
 
-  // Ordena por número se disponível
   const insights = artefatos.sort((a: any, b: any) => {
     const na = parseInt(a.dados?.numero || '99')
     const nb = parseInt(b.dados?.numero || '99')
@@ -36,8 +35,14 @@ export default async function InsightsPage({ params }: { params: Promise<{ slug:
 
       {/* HERO */}
       <div style={{ padding: 'clamp(32px,5vw,72px) clamp(16px,3vw,48px) 0', borderBottom: '2px solid var(--black)' }}>
-        <div style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '3px', textTransform: 'uppercase', color: 'var(--gray-400)', marginBottom: '16px' }}>
-          {projeto.nome} · Key Insights
+        {/* Tag com ponto coral */}
+        <div style={{
+          fontSize: '9px', fontWeight: 700, letterSpacing: '3px',
+          textTransform: 'uppercase', color: 'var(--gray-400)', marginBottom: '16px',
+          display: 'flex', alignItems: 'center', gap: '10px',
+        }}>
+          <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: 'var(--coral)', flexShrink: 0 }}></div>
+          Key Insights
         </div>
         <div style={{ fontSize: 'clamp(36px,8vw,96px)', fontWeight: 900, letterSpacing: '-2px', lineHeight: 0.92, textTransform: 'uppercase' }}>
           {insights.length} Insights
@@ -57,50 +62,77 @@ export default async function InsightsPage({ params }: { params: Promise<{ slug:
           {insights.map((artefato: any) => {
             const dados = artefato.dados || {}
             return (
-              <div key={artefato.slug} style={{ background: 'var(--black)', display: 'grid', gridTemplateColumns: 'clamp(100px,15vw,220px) 1px 1fr', borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
-                {/* Número */}
-                <div style={{ padding: 'clamp(24px,4vw,48px)' }}>
-                  <div style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '3px', textTransform: 'uppercase', color: 'var(--yellow)', marginBottom: '16px' }}>
-                    Key Insight
+              <div key={artefato.slug} style={{
+                display: 'grid',
+                gridTemplateColumns: 'clamp(100px,15vw,200px) 1fr',
+                borderBottom: '1px solid var(--gray-200)',
+                background: 'var(--soft-sand)',
+              }}>
+                {/* Coluna esquerda — coral */}
+                <div style={{
+                  background: 'var(--coral)',
+                  padding: 'clamp(24px,4vw,40px) clamp(16px,3vw,32px)',
+                  display: 'flex', flexDirection: 'column', justifyContent: 'space-between',
+                }}>
+                  <div>
+                    <div style={{
+                      fontSize: '9px', fontWeight: 700, letterSpacing: '3px',
+                      textTransform: 'uppercase', color: 'rgba(255,255,255,0.7)',
+                      marginBottom: '16px',
+                    }}>
+                      Key Insight
+                    </div>
+                    <div style={{
+                      fontSize: 'clamp(64px,10vw,120px)', fontWeight: 900,
+                      lineHeight: 1, color: 'rgba(255,255,255,0.2)',
+                      letterSpacing: '-4px',
+                    }}>
+                      {dados.numero || '—'}
+                    </div>
                   </div>
-                  <div style={{ fontSize: 'clamp(64px,10vw,140px)', fontWeight: 900, lineHeight: 1, color: 'rgba(255,255,255,0.05)', letterSpacing: '-4px' }}>
-                    {dados.numero || '—'}
-                  </div>
+                  <div style={{
+                    width: '24px', height: '3px',
+                    background: 'rgba(255,255,255,0.4)',
+                    marginTop: '24px',
+                  }}></div>
                 </div>
 
-                {/* Divisor */}
-                <div style={{ background: 'rgba(255,255,255,0.07)' }}></div>
-
-                {/* Conteúdo */}
+                {/* Coluna direita — soft-sand */}
                 <div style={{ padding: 'clamp(24px,4vw,48px)' }}>
-                  <div style={{ fontSize: 'clamp(16px,2.5vw,24px)', fontWeight: 700, textTransform: 'uppercase', color: 'white', lineHeight: 1.1, letterSpacing: '-0.5px', marginBottom: '32px' }}>
+                  <div style={{
+                    fontSize: 'clamp(16px,2.5vw,24px)', fontWeight: 700,
+                    textTransform: 'uppercase', color: 'var(--black)',
+                    lineHeight: 1.1, letterSpacing: '-0.5px', marginBottom: '32px',
+                  }}>
                     {dados.observacao || artefato.titulo}
                   </div>
+
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
                     {dados.cadeia && dados.cadeia.map((item: any, i: number) => (
                       <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: '16px' }}>
                         <span style={{
                           fontSize: '9px', fontWeight: 700, letterSpacing: '2px',
-                          textTransform: 'uppercase', color: 'var(--yellow)',
-                          padding: '4px 8px', border: '1px solid var(--yellow)',
+                          textTransform: 'uppercase', color: 'var(--coral)',
+                          padding: '4px 8px', border: '1px solid var(--coral)',
                           flexShrink: 0, marginTop: '2px',
                         }}>
                           {item.tag}
                         </span>
-                        <span style={{ fontSize: 'clamp(12px,1.5vw,14px)', fontWeight: 300, color: 'rgba(255,255,255,0.6)', lineHeight: 1.6 }}>
+                        <span style={{
+                          fontSize: 'clamp(12px,1.5vw,14px)', fontWeight: 300,
+                          color: 'var(--gray-600)', lineHeight: 1.6,
+                        }}>
                           {item.texto}
                         </span>
                       </div>
                     ))}
                   </div>
 
-                  {/* Link para single */}
                   <Link href={`/artefatos/${artefato.slug}`} style={{
                     display: 'inline-flex', alignItems: 'center', gap: '8px',
                     marginTop: '32px', fontSize: '10px', fontWeight: 700,
                     letterSpacing: '2px', textTransform: 'uppercase',
-                    color: 'rgba(255,255,255,0.3)', textDecoration: 'none',
-                    transition: 'color .15s',
+                    color: 'var(--gray-400)', textDecoration: 'none',
                   }}>
                     Ver insight individual →
                   </Link>
