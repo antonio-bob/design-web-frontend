@@ -15,13 +15,18 @@ export default function Nav() {
       zIndex: 100,
     }}>
       <Link href="/" style={{
-        fontSize: '11px',
+        fontSize: '12px',
         fontWeight: 700,
         letterSpacing: '2px',
         textTransform: 'uppercase',
-        color: 'var(--white)',
+        color: 'var(--soft-sand)',
+        backgroundColor: 'var(--coral)',
+        height: '32px',
+        width: '32px',
+        padding: '10px 5px',
+        borderRadius: '24px',
       }}>
-        home
+        DM
       </Link>
       <div style={{ display: 'flex', gap: 'clamp(16px,3vw,40px)' }}>
         {['research','ideation','prototyping','facilitation'].map(fase => (

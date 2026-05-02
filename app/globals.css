@@ -17,6 +17,7 @@
   --teal:    #81b29a;
   --eggshell: #f4f1de;
   --apricot: #f2cc8f;
+  --soft-sand: #edede9;
   --twilight-indigo: #3d405b;
   /* FONTS */
   --font: 'DM Sans', sans-serif;
@@ -37,3 +38,39 @@ html, body {
 }
 
 a { text-decoration: none; color: inherit; }
+
+/* ── GRIDS ── */
+.fases-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border-bottom: 1px solid var(--gray-200);
+}
+
+.projetos-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.projeto-main-grid {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  border-bottom: 1px solid var(--gray-200);
+}
+
+.projeto-info-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.artifacts-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+@media (max-width: 768px) {
+  .fases-grid { grid-template-columns: 1fr; }
+  .projetos-grid { grid-template-columns: 1fr; }
+  .projeto-main-grid { grid-template-columns: 1fr; }
+  .projeto-info-grid { grid-template-columns: repeat(2, 1fr); }
+  .artifacts-grid { grid-template-columns: 1fr; }
+}
