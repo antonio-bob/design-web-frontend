@@ -95,8 +95,19 @@ export default function MarkdownContent({ content }: { content: string }) {
             </pre>
           ),
           table: ({ children }) => (
-            <div style={{ width: '100%', overflowX: 'auto', marginBottom: '24px', borderBottom: '1px solid var(--gray-200)' }}>
-              <table style={{ width: '100%', minWidth: '500px', borderCollapse: 'collapse' }}>
+            <div style={{
+              width: '100%',
+              maxWidth: '100%',
+              overflowX: 'auto',
+              WebkitOverflowScrolling: 'touch',
+              marginBottom: '24px',
+              borderBottom: '1px solid var(--gray-200)',
+            }}>
+              <table style={{
+                width: '100%',
+                minWidth: '400px',
+                borderCollapse: 'collapse',
+              }}>
                 {children}
               </table>
             </div>

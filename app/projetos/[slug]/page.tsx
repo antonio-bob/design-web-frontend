@@ -63,20 +63,15 @@ export default async function ProjetoPage({ params }: { params: Promise<{ slug: 
           {projeto.descricao}
         </div>
 
-        {/* INFO GRID */}
+        {/* INFO GRID — classes CSS controlam padding/border no mobile */}
         <div className="projeto-info-grid">
           {[
             { label: 'Status', val: projeto.status?.replace(/_/g, ' ') },
             { label: 'Período', val: projeto.periodo },
             { label: 'Pesquisador', val: projeto.pesquisador },
             { label: 'Artefatos', val: `${artefatos.length} gerados` },
-          ].map((item, i) => (
-            <div key={item.label} style={{
-              padding: '20px 0',
-              borderRight: i < 3 ? '1px solid var(--gray-200)' : 'none',
-              paddingRight: i < 3 ? '24px' : '0',
-              paddingLeft: i > 0 ? '24px' : '0',
-            }}>
+          ].map((item) => (
+            <div key={item.label} className="projeto-info-cell">
               <span style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase', color: 'var(--gray-400)', display: 'block', marginBottom: '6px' }}>{item.label}</span>
               <div style={{ fontSize: 'clamp(13px,1.5vw,16px)', fontWeight: 400 }}>{item.val || '—'}</div>
             </div>

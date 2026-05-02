@@ -110,6 +110,27 @@ a { text-decoration: none; color: inherit; }
   grid-template-columns: 1fr 1fr;
 }
 
+/* ── INFO CELLS (projeto e método) ── */
+.projeto-info-cell {
+  padding: 20px 16px;
+  border-right: 1px solid var(--gray-200);
+}
+.projeto-info-cell:first-child { padding-left: 0; }
+.projeto-info-cell:last-child {
+  border-right: none;
+  padding-right: 0;
+}
+
+.metodo-meta-cell {
+  padding: 16px;
+  border-right: 1px solid var(--gray-200);
+}
+.metodo-meta-cell:first-child { padding-left: 0; }
+.metodo-meta-cell:last-child {
+  border-right: none;
+  padding-right: 0;
+}
+
 /* ── NÚMERO DECORATIVO MÉTODO ── */
 .metodo-num-decorativo {
   font-size: clamp(80px,18vw,220px);
@@ -123,15 +144,15 @@ a { text-decoration: none; color: inherit; }
 }
 
 /* ── TABELA MARKDOWN ── */
+.md-content {
+  width: 100%;
+  min-width: 0;
+}
 .md-content table {
   display: block;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
   width: 100%;
-}
-.md-content {
-  width: 100%;
-  min-width: 0;
 }
 
 /* ── MOBILE 768px ── */
@@ -148,32 +169,41 @@ a { text-decoration: none; color: inherit; }
   .metodo-body-grid { grid-template-columns: 1fr; }
   .artifacts-grid { grid-template-columns: 1fr; }
 
-  /* Remove borders que causam overflow */
   .projeto-main-grid > div { border-right: none !important; }
   .metodo-body-grid > div { border-right: none !important; }
 
-  /* Sidebar vira seção abaixo */
   .projeto-main-grid > div:last-child { border-top: 2px solid var(--black); }
   .metodo-body-grid > div:last-child { border-top: 1px solid var(--gray-200); }
 
-  /* Info grids — padding controlado */
-  .projeto-info-grid > div,
-  .metodo-meta-grid > div {
-    padding-left: 12px !important;
-    padding-right: 12px !important;
-    border-right: none !important;
+  .metodo-num-decorativo { display: none; }
+
+  /* Info cells mobile */
+  .projeto-info-cell {
+    padding: 16px 10px;
+    border-right: none;
     border-bottom: 1px solid var(--gray-200);
   }
-  .projeto-info-grid > div:nth-child(odd),
-  .metodo-meta-grid > div:nth-child(odd) {
-    border-right: 1px solid var(--gray-200) !important;
-  }
+  .projeto-info-cell:first-child { padding-left: 10px; }
+  .projeto-info-cell:last-child { padding-right: 10px; border-right: none; }
+  .projeto-info-cell:nth-child(odd) { border-right: 1px solid var(--gray-200); }
 
-  .metodo-num-decorativo { display: none; }
+  .metodo-meta-cell {
+    padding: 16px 10px;
+    border-right: none;
+    border-bottom: 1px solid var(--gray-200);
+  }
+  .metodo-meta-cell:first-child { padding-left: 10px; }
+  .metodo-meta-cell:last-child { padding-right: 10px; border-right: none; }
+  .metodo-meta-cell:nth-child(odd) { border-right: 1px solid var(--gray-200); }
 }
 
 /* ── MOBILE 480px ── */
 @media (max-width: 480px) {
   .fases-grid { grid-template-columns: 1fr; }
   .metodos-grid { grid-template-columns: 1fr; }
+
+  .projeto-info-cell,
+  .metodo-meta-cell {
+    padding: 14px 8px;
+  }
 }
